@@ -58,3 +58,55 @@ class RoomController:
             response = UtilController.build_error_payback(exception, status_code)
 
         return UtilController.build_response(response, status_code)
+
+    @staticmethod
+    @cross_origin()
+    @chat_controller.route('/room/<string:room_id>/<string:user_id>', methods=['DELETE'])
+    def delete_user(room_id: str, user_id: str):
+        response: dict = {}
+        status_code: int = 200
+        try:
+            Logger.info(f"delete_user: room_id={room_id} user_id={user_id}")
+            service.delete_user(
+                room_id=room_id,
+                user_id=user_id
+            )
+        except Exception as exception:
+            status_code = 500
+            response = UtilController.build_error_payback(exception, status_code)
+
+        return UtilController.build_response(response, status_code)
+
+    @staticmethod
+    @cross_origin()
+    @chat_controller.route('/room/<string:pin>', methods=['DELETE'])
+    def delete_room(pin: str):
+        response: dict = {}
+        status_code: int = 200
+        try:
+            Logger.info(f"delete_room: pin={pin}")
+            service.delete_room(
+                pin=pin
+            )
+        except Exception as exception:
+            status_code = 500
+            response = UtilController.build_error_payback(exception, status_code)
+
+        return UtilController.build_response(response, status_code)
+
+    @staticmethod
+    @cross_origin()
+    @chat_controller.route('/room/<string:pin>', methods=['POST'])
+    def create_room(pin: str):
+        response: dict = {}
+        status_code: int = 200
+        try:
+            Logger.info(f"create_room: pin={pin}")
+            service.create_room(
+                pin=pin
+            )
+        except Exception as exception:
+            status_code = 500
+            response = UtilController.build_error_payback(exception, status_code)
+
+        return UtilController.build_response(response, status_code)

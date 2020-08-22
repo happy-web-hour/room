@@ -1,4 +1,5 @@
 import os
+from typing import List
 
 from src.library.database.Mongo import Mongo
 
@@ -22,7 +23,7 @@ class RoomRepository:
         return arr["rooms"]
 
     def add_user(self, room_id: str, user_id: str):
-        self.__mongo.update_element(
+        self.__mongo.push_element(
             collection=self.__room,
             query={
                 "rooms": {
@@ -31,8 +32,36 @@ class RoomRepository:
                     }
                 }
             },
-            obj=[{"$set": {"rooms": {"users": {"$concatArrays": ["$users", [user_id]]}}}}]
+            obj={"rooms.$.users": user_id}
         )
 
     def get_all_rooms(self):
         return [elem for elem in self.__mongo.find_all(self.__room)]
+
+    def delete_user(self,  room_id: str, user_id: str):
+        self.__mongo.pull_element(
+            collection=self.__room,
+            query={
+                "rooms": {
+                    "$elemMatch": {
+                        "roomId": room_id
+                    }
+                }
+            },
+            obj={"rooms.$.users": user_id}
+        )
+
+    def create_room(self, pin: str, rooms: List[dict]):
+        self.__mongo.insert_one(
+            collection=self.__room,
+            elem={
+                "pin": pin,
+                "rooms": rooms
+            }
+        )
+
+    def delete_room(self, pin: str):
+        self.__mongo.delete_one(
+            collection=self.__room,
+            query={"pin": pin}
+        )

@@ -46,10 +46,11 @@ class Mongo:
         db_collection = self.__database[collection]
         db_collection.update(query, {'$push': obj})
 
-    def update_element(self, query, collection, obj):
-        db_collection = self.__database[collection]
-        db_collection.aggregate(query, obj)
-
-    def delete_chat(self, collection, query):
+    def delete_one(self, collection, query):
         db_collection = self.__database[collection]
         db_collection.delete_one(query)
+
+    def pull_element(self, collection, query, obj):
+        db_collection = self.__database[collection]
+        db_collection.update(query, {'$pull': obj})
+
