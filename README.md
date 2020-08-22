@@ -22,7 +22,7 @@
 **Response**
 200
 
-- GET /room/{roomId} - retorna lista de usuários
+- GET /room/{roomId}/users - retorna lista de usuários
 
 **Request**	
 

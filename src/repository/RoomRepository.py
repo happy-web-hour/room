@@ -61,3 +61,15 @@ class RoomRepository:
             collection=self.__room,
             query={"pin": pin}
         )
+
+    def list_users(self, room_id: str):
+        return self.__mongo.find_by(
+            collection=self.__room,
+            query={
+                "rooms": {
+                    "$elemMatch": {
+                        "roomId": room_id
+                    }
+                }
+            }
+        )["rooms"][0]["users"]

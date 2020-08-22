@@ -110,3 +110,20 @@ class RoomController:
             response = UtilController.build_error_payback(exception, status_code)
 
         return UtilController.build_response(response, status_code)
+
+    @staticmethod
+    @cross_origin()
+    @chat_controller.route('/room/<string:room_id>/users', methods=['GET'])
+    def list_users(room_id: str):
+        response: dict
+        status_code: int = 200
+        try:
+            Logger.info(f"list_users: room_id={room_id}")
+            response = service.list_users(
+                room_id=room_id
+            )
+        except Exception as exception:
+            status_code = 500
+            response = UtilController.build_error_payback(exception, status_code)
+
+        return UtilController.build_response(response, status_code)
