@@ -21,9 +21,10 @@ class RoomService:
                 "users": []
             } for room_name in self.__rooms_name
         ]
-        self.__repository.create_room(
-            pin=pin,
-            rooms=rooms
+        self.__repository.create_room({
+                "pin": pin,
+                "rooms": rooms
+            }
         )
 
 

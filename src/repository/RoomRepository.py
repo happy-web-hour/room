@@ -1,5 +1,4 @@
 import os
-from typing import List
 
 from src.library.database.Mongo import Mongo
 
@@ -51,13 +50,10 @@ class RoomRepository:
             obj={"rooms.$.users": user_id}
         )
 
-    def create_room(self, pin: str, rooms: List[dict]):
+    def create_room(self, room: dict):
         self.__mongo.insert_one(
             collection=self.__room,
-            elem={
-                "pin": pin,
-                "rooms": rooms
-            }
+            elem=room
         )
 
     def delete_room(self, pin: str):
