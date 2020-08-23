@@ -8,7 +8,9 @@ class RoomService:
     def __init__(self, room_repository: RoomRepository, chat_repository: ChatRepository):
         self.__room_repository = room_repository
         self.__chat_repository = chat_repository
-        self.__rooms_name = ["sala de jogos", "fumodromo", "fofoqueirxs", "rapaziada"]
+        self.__rooms_name = ["sala de jogos", "fumodromo", "fofoqueirxs", "rapaziada", "galera do fundao",
+                             "tops", "soh devs", "frontenders", "backenders", "c level", "desce mais uma",
+                             "los ousados"]
 
     def get_rooms(self, pin: str):
         return self.__room_repository.get_rooms(
