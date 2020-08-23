@@ -9,6 +9,7 @@ from src.controller.RoomController import chat_controller
 class FlaskConfig:
     app = Flask(__name__)
     cors = CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
     def __call__(self):
         self.register_blue_prints()

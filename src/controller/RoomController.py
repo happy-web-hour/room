@@ -10,7 +10,6 @@ chat_controller = Blueprint('ChatController', __name__)
 
 class RoomController:
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:pin>', methods=['GET'])
     def get_rooms(pin: str):
         response: dict
@@ -27,7 +26,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room', methods=['GET'])
     def get_all_rooms():
         response: dict
@@ -42,7 +40,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:room_id>/<string:user_id>', methods=['POST'])
     def add_user(room_id: str, user_id: str):
         response: dict = {}
@@ -60,7 +57,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:room_id>/<string:user_id>', methods=['DELETE'])
     def delete_user(room_id: str, user_id: str):
         response: dict = {}
@@ -78,7 +74,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:pin>', methods=['DELETE'])
     def delete_room(pin: str):
         response: dict = {}
@@ -95,7 +90,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:pin>', methods=['POST'])
     def create_room(pin: str):
         response: dict = {}
@@ -112,7 +106,6 @@ class RoomController:
         return UtilController.build_response(response, status_code)
 
     @staticmethod
-    @cross_origin()
     @chat_controller.route('/room/<string:room_id>/users', methods=['GET'])
     def list_users(room_id: str):
         response: dict
